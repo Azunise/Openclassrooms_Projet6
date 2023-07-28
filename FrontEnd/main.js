@@ -329,8 +329,6 @@ submitWork.addEventListener("submit", async function(event) {
         return alert("Erreur lors de l'ajout de projet, tous les champs sont nécessaires");
     };
 
-    
-
 });
 
 // La fonction qui affiche logout au lieu de login lorsqu'on est connecté
