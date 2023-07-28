@@ -48,7 +48,8 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
+	
+	max-width: 1440px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -56,7 +57,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 150px;
 }
 section {
 	margin: 50px 0
@@ -91,7 +92,7 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 22px;
 	font-size: 1.2em;
 	
 }
@@ -99,17 +100,23 @@ nav li {
 li:hover, a:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
+
+	justify-content: space-between;
+	margin: 50px 245px;
+	gap: 72px;
+	line-height: 16px;
 }
 #introduction figure {
 	flex: 1
 }
 #introduction img {
 	display: block;
-	margin: auto;
-	width: 80%;
+	
+	width: 474px;
 }
 
 #introduction article {
@@ -120,12 +127,17 @@ li:hover, a:hover {
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+	margin-bottom: 20px;
 }
 #portfolio h2 {
 	text-align: center;
 	/*margin-bottom: 1em;*/
 }
+
+#portfolio {
+	margin: 0px 245px;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -140,7 +152,7 @@ li:hover, a:hover {
 }
 #contact {
 	width: 50%;
-	margin: auto;
+	margin: 55px auto;
 }
 #contact > * {
 	text-align: center;
@@ -156,13 +168,42 @@ li:hover, a:hover {
 	flex-direction: column;
 }
 
-#contact input {
+.modalOtherSelf form {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 15px;
+	margin: 35px 75px 25px 75px;
+	width: 420px;
+	
+}
+
+.login form {
+	text-align: left;
+	margin: 22px;
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+input#email, input#categorie, input#password, input#name,  input#title, select#category {
+	padding-left: 10px;
+	letter-spacing: 1.3px;
 	height: 50px;
-	font-size: 1.2em;
+	box-sizing: border-box;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+
+textarea#message {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+
+
+#contact label, .modalOtherSelf label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -175,10 +216,19 @@ input[type="submit"]{
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
+	margin : 22px auto ;
 	width: 180px;
 	text-align: center;
-	border-radius: 60px ;
+	border-radius: 60px;
+	letter-spacing: normal;
+	
+}
+
+
+
+input[type="submit"]:active {
+	background-color: #0E2F28;
+	color: #FFFEF8;
 }
 
 footer nav ul {
@@ -189,6 +239,10 @@ footer nav ul {
 
 a {
 	text-decoration: none;
+}
+
+header a {
+	color: black;
 }
 
 .sortingButtonDiv {
@@ -235,6 +289,11 @@ a {
 	text-align: center;
 }
 
+.modalItself .grosVert {
+	padding: 10px 50px;
+	margin: 23px;
+}
+
 .sortingButtonDiv button:hover {
 	color: white;
 	background-color: #1D6154;
@@ -243,6 +302,8 @@ a {
 .login {
 	width: 50%;
 	margin: auto;
+	display: flex;
+	flex-direction: column;
 }
 
 .login input {
@@ -253,17 +314,19 @@ a {
 
 }
 
-.login form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+select#category, input#title {
+	width: 420px;
 }
+
+
+
+
 
 .login div {
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 6px;
+	margin: 15px;
 	
 }
 
@@ -278,7 +341,7 @@ a {
 /***************************************************************************************/
 
 .editMode {
-	display: flex;
+	display: none;
 }
 
 .editHeader {
@@ -296,6 +359,7 @@ a {
 	letter-spacing: 0em;
 	text-align: center;
 
+	
 
 }
 
@@ -322,8 +386,7 @@ a {
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
-	padding-left: 10%;
-	padding-right: 10%;
+	
 }
 
 .tooBig {
@@ -338,11 +401,12 @@ a {
 
 
 .closeModalButton {
-	background-color: azure;
+	width: 24px;
+	height: 24px;
 }
 
 .modal {
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	position: fixed;
@@ -374,12 +438,22 @@ a {
 	position: absolute;
 	box-sizing: border-box;
 	width: 630px;
-	height: 730px;
+	
 	overflow: auto;
 	background-color: #FFFFFF;
 	color: #000000;
-	padding: 16px 20px 13px 20px;
+	padding: 26px 30px 48px 30px;
 	border-radius: 10px;
+}
+
+.modalItself h3, .modalOtherSelf h3{
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
 }
 
 .modalGallery {
@@ -391,16 +465,20 @@ a {
 	margin-top: 30px;
 }
 
-.modalGallery img{
+.modalGallery img {
 	width: 76px;
 	height: 103px;
+}
+
+.modalGallery figure {
+	position: relative;
 }
 
 .alignFlexEnd {
 	align-self: flex-end;
 }
 
-.closeModalButton {
+.closeModalButton, .backspace {
 	display: flex;
 	background-color: #FFFEF8;
 	border: none;
@@ -412,12 +490,20 @@ a {
 	align-items: center;
 }
 
-hr {
+.modalItself hr {
 	border: none;
     border-top: 1px solid #B3B3B3;
     text-align: center;
 	width: 75%;
 	margin-top: 45px;
+	margin-bottom: 15px;
+}
+
+.modalOtherSelf hr {
+	border: none;
+    border-top: 1px solid #B3B3B3;
+    text-align: center;
+	width: 100%;
 }
 
 .devoid {
@@ -426,14 +512,77 @@ hr {
 	border: none;
 	font-family: "Work sans";
 	font-size: 14px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	
 	gap: 10px;
 	align-items: center;
+	color: #D65353;
+}
+
+
+.icon {
+	position: absolute;
+	top: 5px;
+	background-color: black;
+	color: white;
+	width: 17px;
+	height: 17px;
+	border-radius: 5px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+
 }
 
 .binIcon {
-	position: absolute;
 	right: 5px;
-	top: 5px;
+	
+}
+
+.arrowsIcon {
+ 	right: 25px;
+	display: none;
+}
+
+.modalOtherSelf {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	box-sizing: border-box;
+	width: 630px;
+	
+	overflow: auto;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 26px 30px 30px 30px;
+	border-radius: 10px;
+}
+
+.gallery figcaption {
+	margin-top: 7px;
+
+}
+
+.twoToggles {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.picSubmition {
+	display: flex;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	align-items: center;
+}
+
+.picSubmition .grosVert {
+	background-color: #CBD6DC;
+	color: #306685;
+	border: none;
+	padding: 10px 33px;
 }

@@ -1,4 +1,6 @@
 
+
+
 const form = document.querySelector("form");
 
 
@@ -13,7 +15,7 @@ form.addEventListener("submit", async function(event) {
 	
 	const formData = await fetch("http://localhost:5678/api/users/login", {
 	method: "POST",
-	mode : "no-cors",
+	headers: { "Content-Type": "application/json" },
 	body: JSON.stringify(userCredentials)
   	});
 
@@ -24,12 +26,23 @@ form.addEventListener("submit", async function(event) {
 	const authenticationToken = authenticationResponse.token;
 	const authenticationToggle = formData.ok;
 	
-
+	console.log(sessionStorage);
+	console.log("token");
+	console.log(authenticationToken);
+	console.log(authenticationToggle);
 
 	if (authenticationToggle === true) {
 		sessionStorage.setItem("authenticationToken", authenticationToken);
 		sessionStorage.setItem("authenticationToggle", authenticationToggle);
-		window.location.replace("index.html");
-	};
+		console.log(sessionStorage);
+		window.location.replace("../index.html");
+		
+	} else {
+		sessionStorage.setItem("authenticationToken", authenticationToken);
+		sessionStorage.setItem("authenticationToggle", authenticationToggle);
+		console.log(sessionStorage);
+	}
+
+
 });
 
