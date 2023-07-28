@@ -38,9 +38,7 @@ form.addEventListener("submit", async function(event) {
 		window.location.replace("../index.html");
 		
 	} else {
-		sessionStorage.setItem("authenticationToken", authenticationToken);
-		sessionStorage.setItem("authenticationToggle", authenticationToggle);
-		console.log(sessionStorage);
+		return alert("Ce n'est pas la bonne combinaison")
 	}
 
 

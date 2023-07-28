@@ -431,6 +431,19 @@ select#category, input#title {
 	align-items: center;
 }
 
+.notOpenModalButton {
+	display: flex;
+	background-color: #FFFEF8;
+	border: none;
+	font-family: "Work sans";
+	font-size: 14px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	gap: 10px;
+	align-items: center;
+}
+
+
 .modalItself {
 	display: flex;
 	flex-direction: column;
@@ -504,6 +517,8 @@ select#category, input#title {
     border-top: 1px solid #B3B3B3;
     text-align: center;
 	width: 100%;
+	margin-top: 45px;
+	margin-bottom: 10px;
 }
 
 .devoid {
@@ -574,15 +589,58 @@ select#category, input#title {
 .picSubmition {
 	display: flex;
 	flex-direction: column;
-	background-color: #E8F1F6;
-	width: 420px;
-	height: 169px;
 	align-items: center;
 }
 
-.picSubmition .grosVert {
+
+
+.imageUrlDiv img {
+	max-width: 420px;
+	max-height: 169px;
+}
+
+.imageUrlDiv {
+	display: flex;
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	
+	flex-direction: column;
+	align-items: center;
+	
+}
+
+.imageUrlDiv .fa {
+	width: 58px;
+	height: 58px;
+	font-size: 58px;
+	margin: 22px 0px 8px 0px;
+}
+
+.imageUrlDiv .grosVert {
+	margin: 7px;
+	width: 173px;
+	height: 36px;
 	background-color: #CBD6DC;
 	color: #306685;
 	border: none;
 	padding: 10px 33px;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.imageUrlDiv label {
+	margin: 0px;
+}
+
+.imageUrlDiv p {
+	margin-bottom: 19px;
+}
+
+input#imageUrl {
+	height: 0px;
 }

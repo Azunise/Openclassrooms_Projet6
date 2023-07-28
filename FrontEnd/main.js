@@ -1,3 +1,5 @@
+console.log("rechargement");
+
 const responseWorks = await fetch('http://localhost:5678/api/works');
 const works = await responseWorks.json();
 
@@ -11,44 +13,33 @@ console.log(categories);
 
 
 
-
+//fonction qui genere la galerie principale
 
 function generateProject(works) {
     document.querySelector(".gallery").innerHTML= "";
 
 
-    if (works === {}) {
 
 
 
-    }else{
+    const sectionGallery = document.querySelector(".gallery");
 
+    for (let i = 0; i < works.length; i++) {
+        console.log(works[i]);
+        const project = works[i];
+        
+        const worksElement = document.createElement("figure");
 
-        const sectionGallery = document.querySelector(".gallery");
+        const imageElement = document.createElement("img");
+        imageElement.src = project.imageUrl;
+        const titleElement = document.createElement("figcaption");
+        titleElement.innerText = project.title ?? "Title in progress";
+    
+        sectionGallery.appendChild(worksElement);
+        worksElement.appendChild(imageElement);
+        worksElement.appendChild(titleElement);
 
-        for (let i = 0; i < works.length; i++) {
-            console.log(works[i]);
-            const project = works[i];
-            
-            const worksElement = document.createElement("figure");
-
-            const imageElement = document.createElement("img");
-            imageElement.src = project.imageUrl;
-            const titleElement = document.createElement("figcaption");
-            titleElement.innerText = project.title ?? "Title in progress";
-
-
-            
-            const categoryElement = document.createElement("p");
-            categoryElement.innerText = project.categoryId ?? "Category in progress";
-
-            
-
-            sectionGallery.appendChild(worksElement);
-            worksElement.appendChild(imageElement);
-            worksElement.appendChild(titleElement);
-
-        }
+    
     }
 }
 
@@ -57,7 +48,7 @@ generateProject(works);
 
  
 
-
+//Fonction qui genere les autres boutons de tri (autant que de categories)
 
 function generateSorting(categories) {
 
@@ -91,18 +82,22 @@ function generateSorting(categories) {
 document.querySelector(".sortingButtonDiv").innerHtml= "";
 generateSorting(categories);
 
+//fonctions qui genere la galerie avec des parties de works plus ou moins filtrées
+
 const unfilteringButton = document.querySelector(".sortingButtonDiv button");
 unfilteringButton.addEventListener("click", function() {generateProject(works) });
 
 function worksFiltering(works, i) {
 
     const filteredWorks = works.filter(function (works) {
-        return works.categoryId === i;
+        return works.categoryId === i+1;
     });
     document.querySelector(".gallery").innerHTML = "";
     generateProject(filteredWorks);
 };
 
+
+//Gere les ouvertures et fermeture de la modale
 
 const openModalButton = document.querySelectorAll(".openModalButton");
 const closeModalButton = document.querySelectorAll(".closeModalButton");
@@ -125,14 +120,14 @@ for(let i = 0; i < closeModalButton.length; i++){
 };
 
 modal.addEventListener("click", function(event) {
-    if (event.target === modal) {
+    if (event.target === modal) { //ne se declenche que lorsqu'on clique sur un élément qui est exactement la modale et pas un de ses descendants
         modal.style.display = "none";
     };
 });
 
 	
 
-
+//Fonction qui genere la galerie pour la modale
 
 function generateProjectModal(works) {
     document.querySelector(".modalGallery").innerHTML= "";
@@ -181,6 +176,8 @@ function generateProjectModal(works) {
 
 generateProjectModal(works);
 
+//Toggle entre edit mode affiché ou non en fonction du statut de connexion
+
 function editToggle() {
     const trigger = document.querySelectorAll(".editMode");
     if (sessionStorage.getItem('authenticationToggle') === "true") {
@@ -194,8 +191,6 @@ function editToggle() {
         }
     }
         
-    
-    
 };
 
 console.log(sessionStorage);
@@ -205,19 +200,20 @@ editToggle();
 
 
 
-const matches = document.querySelectorAll("div.modalGallery > figure");
+//Affichage du fa flèches multidirectionelles on hover
 
+const figures = document.querySelectorAll("div.modalGallery > figure");
 
-for(let i = 0; i < matches.length; i++){
-    matches[i].addEventListener("mouseover", function() {
-        const cross = matches[i].querySelector(".arrowsIcon");
+for(let i = 0; i < figures.length; i++){
+    figures[i].addEventListener("mouseover", function() {
+        const cross = figures[i].querySelector(".arrowsIcon");
         cross.style.display = "flex";
     });
 };
 
-for(let i = 0; i < matches.length; i++){
-    matches[i].addEventListener("mouseout", function() {
-        const cross = matches[i].querySelector(".arrowsIcon");
+for(let i = 0; i < figures.length; i++){
+    figures[i].addEventListener("mouseout", function() {
+        const cross = figures[i].querySelector(".arrowsIcon");
         cross.style.display = "none";
     });
 };
@@ -226,6 +222,155 @@ for(let i = 0; i < matches.length; i++){
 
 
 
+
+
+
+//Pour passer de la première à la seconde page de modal et vice-versa (toujours en commencant par la première)
+
+const toggleModal = document.querySelectorAll(".toggleModalButton");
+const modalItself = document.querySelector(".modalItself");
+const modalOtherSelf = document.querySelector(".modalOtherSelf");
+modalItself.style.display = "flex";
+
+for(let i = 0; i < toggleModal.length; i++){
+    toggleModal[i].addEventListener("click", function() {
+        
+        if (modalItself.style.display === "flex") {
+            modalItself.style.display = "none";
+            modalOtherSelf.style.display = "flex";
+        } else {
+            modalItself.style.display = "flex";
+            modalOtherSelf.style.display = "none";
+        };
+    });
+};
+
+//La fonction qui genere la liste des catégories disponibles
+
+function generateSelectRoll() {
+    
+    const categorySelect = document.querySelector("#category");
+    
+    
+    for (let i = 0; i < categories.length; i++) {
+        categorySelect.innerHTML += "<option value='" + (i+1) + "'>" + categories[i].name + "</option>";
+    }
+    
+    
+    
+}
+
+generateSelectRoll();
+
+//Fonction qui récupère le plus grand id de works
+/*
+const submitWork = document.querySelector("#submitWork")
+
+function homeMadeMax(works) {
+    
+    var localMax = 0;
+
+    for (let i = 0; i < works.length; i++) {
+        
+        if (works[i].id > localMax) {
+            localMax = works[i].id;
+        }
+        
+    }
+    return localMax;
+}*/
+
+
+
+const inputImageUrl = document.querySelector("#imageUrl");
+inputImageUrl.style.opacity = 0;
+
+const imageUrl = document.querySelector("#imageUrl");
+
+imageUrl.addEventListener("change", function() {
+	
+	
+	if (imageUrl.files[0].size <= 4 * 1024 * 1024) {
+		
+		const imageUrlDiv = document.querySelector(".imageUrlDiv");
+		
+        imageUrlDiv.innerHTML = "";
+		const preview = document.createElement("img");
+		preview.src = URL.createObjectURL(inputImageUrl.files[0]);
+		imageUrlDiv.appendChild(preview);
+
+		preview.addEventListener("click", function() {
+			inputImageUrl.click();
+		});
+
+
+	} else {
+		return alert ("L'image dépasse les 4 Mo")
+	};
+});
+
+
+
+//Le bouton submit rajoute les infos
+
+submitWork.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+
+    //const id = (homeMadeMax(works) + 1) ?? 0;
+
+    const submitData = new FormData;
+    
+    submitData.append("image",inputImageUrl.files[0]);
+    submitData.append("title",document.querySelector("#title").value);
+    submitData.append("category",document.querySelector("#category").value);
+
+	
+    const authenticationToken = sessionStorage.getItem("authenticationToken");
+
+
+	const addWorks = await fetch("http://localhost:5678/api/works/", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + authenticationToken,
+            accept: "application/json"		
+        },
+        body: submitData
+  	});
+
+    if (addWorks.ok) {
+
+        const newWorks = works.push(await addWorks.json());
+        generateProject(newWorks);
+        generateProjectModal(newWorks);
+    } else {
+        return alert("Erreur lors de l'ajout de projet, tous les champs sont nécessaires");
+    };
+
+    
+
+});
+
+// La fonction qui affiche logout au lieu de login lorsqu'on est connecté
+
+function loginTogglin() {
+    const authenticationToggle = sessionStorage.getItem("authenticationToggle");
+    const loginToggle = document.querySelector("#loginLogout");
+    if (authenticationToggle === "true" ) {
+
+        loginToggle.innerText = "logout";
+        
+
+
+    } else {
+        loginToggle.innerText = "login";
+    };
+
+}
+
+loginTogglin();
+
+//La fonction qui permet de retirer des travaux en fonction de leur id
 
 async function rmWork(id) {
 	const authenticationToken = sessionStorage.getItem("authenticationToken");
@@ -248,135 +393,54 @@ async function rmWork(id) {
         const categories = await responseCategories.json();
 
         generateProject(works);
-        generateSorting(categories);
         generateProjectModal(works);
 
-	};
+	} else {
+        return alert("Erreur lors de la suppression de projet");
+    };
 };
 
+//les fa de poubelles suppriment le travail associé
 
+const binIcon = document.querySelectorAll(".binIcon");
 
-const toggleModal = document.querySelectorAll(".toggleModalButton");
-const modalItself = document.querySelector(".modalItself");
-const modalOtherSelf = document.querySelector(".modalOtherSelf");
-modalItself.style.display = "flex";
-
-for(let i = 0; i < toggleModal.length; i++){
-    toggleModal[i].addEventListener("click", function() {
+for (let i = 0; i < binIcon.length; i++){
+    binIcon[i].addEventListener("click", function() {
         
-        if (modalItself.style.display === "flex") {
-            modalItself.style.display = "none";
-            modalOtherSelf.style.display = "flex";
-        } else {
-            modalItself.style.display = "flex";
-            modalOtherSelf.style.display = "none";
-        };
+        rmWork(works[i].id);
+
     });
 };
 
+//Le bouton supprimer la galerie retire tous les travaux d'un coup (sécurité)
 
-function generateSelectRoll() {
-    
-    const categorySelect = document.querySelector("#category");
-    
-    
-    for (let i = 0; i < categories.length; i++) {
-        categorySelect.innerHTML += "<option value='" + i + "'>" + categories[i].name + "</option>";
-    }
-    
-    
-    
-}
+const rmAll = document.querySelector(".devoid");
 
-generateSelectRoll();
-
-const submitWork = document.querySelector("#submitWork")
-
-function homeMadeMax(works) {
-    
-    var localMax = 0;
-
-    for (let i = 0; i < works.length; i++) {
+rmAll.addEventListener("click", function() {
+    for (let i = 0; i < works.length; i++){
         
-        if (works[i].id > localMax) {
-            localMax = works[i].id;
-        }
+        rmWork(works[i].id);
         
-    }
-    return localMax;
-}
-
-const inputImageUrl = document.querySelector("#imageUrl");
-inputImageUrl.style.opacity = 0;
-
-const imageUrl = document.querySelector("#imageUrl");
-
-imageUrl.addEventListener("change", function() {
-	
-	
-	if (imageUrl.files[0].size <= 4 * 1024 * 1024) {
-		
-		
-		const imageUrlDiv = document.querySelector(".imageUrlDiv");
-		
-        imageUrlDiv.innerHTML = "";
-		const preview = document.createElement("img");
-		preview.src = URL.createObjectURL(inputImageUrl.files[0]);
-		preview.className = "";
-		imageUrlDiv.appendChild(preview);
-
-		preview.addEventListener("click", function() {
-			inputImageUrl.click();
-		});
-
-
-	} else {
-		inputImageUrl.value = "";
-		return alert ("Taille de l'image supérieure à 4mo.")
-	};
-});
-
-submitWork.addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-
-    const id = (homeMadeMax(works) + 1) ?? 0;
-    const title = document.querySelector("#title").value ?? "0";
-    const imageUrl = document.querySelector("#inputImageUrl").value ?? "0";
-    const categoryId = document.querySelector("#category").value ?? "0";
-    const userId = 0;
-
-	const submitData = {id, title, imageUrl, categoryId, userId};
-    console.log(JSON.stringify(submitData));
-	
-    const authenticationToken = sessionStorage.getItem("authenticationToken");
-
-	const formData = await fetch("http://localhost:5678/api/works", {
-	method: "POST",
-	headers: {
-        "Authorization": "Bearer " + authenticationToken,
-        accept: "application/json"			
-    },
-	body: JSON.stringify(submitData)
-  	});
-
-});
-
-
-
-function loginTogglin() {
-    const authenticationToggle = sessionStorage.getItem("authenticationToggle");
-    const loginToggle = document.querySelector("#loginLogout");
-    if (authenticationToggle === "true" ) {
-
-        loginToggle.innerText = "logout";
-        
-
-
-    } else {
-        loginToggle.innerText = "login";
     };
-    console.log(loginToggle.innerText);
-}
+});
 
-loginTogglin();
+
+//Les fa de flèches multidirectionelles ouvrent les photos dans une nouvelle page
+
+const arrowsIcon = document.querySelectorAll(".arrowsIcon")
+
+for (let i = 0; i < arrowsIcon.length; i++){
+    arrowsIcon[i].addEventListener("click", function() {
+        
+        window.open(works[i].imageUrl);
+
+    });
+};
+
+//pour se déconnecter
+
+const logout = document.querySelector("#loginLogout")
+
+logout.addEventListener("click", function() {
+    sessionStorage.setItem("authenticationToggle", "false");
+});
