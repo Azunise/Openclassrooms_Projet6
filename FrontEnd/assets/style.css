@@ -168,7 +168,7 @@ li:hover, a:hover {
 	flex-direction: column;
 }
 
-.modalOtherSelf form {
+.modalPageTwo form {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -203,7 +203,7 @@ textarea#message {
 
 
 
-#contact label, .modalOtherSelf label {
+#contact label, .modalPageTwo label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -253,33 +253,14 @@ header a {
 	margin: 50px;
 }
 
-.sortingButtonDiv button {
-	border-radius: 100px; /*trop grande valeur, c'est volontaire*/
-	color: #1D6154;
-	background-color: white;
-	border: solid #1D6154 1px;
-	box-sizing: border-box;
-
-	padding: 8px; /*remplacer top et bottom par (37-txtheight)/2*/
-
-	font-family: Syne;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 19px;
-	letter-spacing: 0em;
-	text-align: center;
-
-}
-
-.grosVert {
-
+.sortingButtonDiv button, .bigButton {
 	border-radius: 100px; /*trop grande valeur, c'est volontaire*/
 	color: white;
 	background-color: #1D6154;
 	border: solid #1D6154 1px;
 	box-sizing: border-box;
 
-	padding: 8px; /*remplacer top et bottom par (37-txtheight)/2*/
+	padding: 8px;
 
 	font-family: Syne;
 	font-size: 16px;
@@ -287,17 +268,25 @@ header a {
 	line-height: 19px;
 	letter-spacing: 0em;
 	text-align: center;
+
 }
 
-.modalItself .grosVert {
-	padding: 10px 50px;
-	margin: 23px;
+.sortingButtonDiv button {
+	color: #1D6154;
+	background-color: white;
 }
 
 .sortingButtonDiv button:hover {
 	color: white;
 	background-color: #1D6154;
 }
+
+.modalPageOne .bigButton {
+	padding: 10px 50px;
+	margin: 23px;
+}
+
+
 
 .login {
 	width: 50%;
@@ -444,7 +433,7 @@ select#category, input#title {
 }
 
 
-.modalItself {
+.modalPageOne {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -459,7 +448,7 @@ select#category, input#title {
 	border-radius: 10px;
 }
 
-.modalItself h3, .modalOtherSelf h3{
+.modalPageOne h3, .modalPageTwo h3{
 	color: #000;
 	text-align: center;
 	font-family: Work Sans;
@@ -503,7 +492,7 @@ select#category, input#title {
 	align-items: center;
 }
 
-.modalItself hr {
+.modalPageOne hr {
 	border: none;
     border-top: 1px solid #B3B3B3;
     text-align: center;
@@ -512,7 +501,7 @@ select#category, input#title {
 	margin-bottom: 15px;
 }
 
-.modalOtherSelf hr {
+.modalPageTwo hr {
 	border: none;
     border-top: 1px solid #B3B3B3;
     text-align: center;
@@ -521,7 +510,7 @@ select#category, input#title {
 	margin-bottom: 10px;
 }
 
-.devoid {
+.massDeletion {
 	display: flex;
 	background-color: #FFFEF8;
 	border: none;
@@ -547,12 +536,10 @@ select#category, input#title {
 	align-items: center;
 	justify-content: center;
 	font-size: 10px;
-
 }
 
 .binIcon {
 	right: 5px;
-	
 }
 
 .arrowsIcon {
@@ -560,7 +547,7 @@ select#category, input#title {
 	display: none;
 }
 
-.modalOtherSelf {
+.modalPageTwo {
 	display: none;
 	flex-direction: column;
 	align-items: center;
@@ -617,7 +604,7 @@ select#category, input#title {
 	margin: 22px 0px 8px 0px;
 }
 
-.imageUrlDiv .grosVert {
+.imageUrlDiv .bigButton {
 	margin: 7px;
 	width: 173px;
 	height: 36px;

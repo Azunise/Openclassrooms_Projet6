@@ -1,4 +1,4 @@
-console.log("rechargement");
+
 
 const responseWorks = await fetch('http://localhost:5678/api/works');
 const works = await responseWorks.json();
@@ -18,14 +18,10 @@ console.log(categories);
 function generateProject(works) {
     document.querySelector(".gallery").innerHTML= "";
 
-
-
-
-
     const sectionGallery = document.querySelector(".gallery");
 
     for (let i = 0; i < works.length; i++) {
-        console.log(works[i]);
+        
         const project = works[i];
         
         const worksElement = document.createElement("figure");
@@ -42,7 +38,6 @@ function generateProject(works) {
     
     }
 }
-
 
 generateProject(works);
 
@@ -103,12 +98,11 @@ const openModalButton = document.querySelectorAll(".openModalButton");
 const closeModalButton = document.querySelectorAll(".closeModalButton");
 const modal = document.querySelector(".modal");
 
-
 for(let i = 0; i < openModalButton.length; i++){
     openModalButton[i].addEventListener("click", function() {
     modal.style.display = "flex";
-    modalItself.style.display = "flex";
-    modalOtherSelf.style.display = "none";
+    modalPageOne.style.display = "flex";
+    modalPageTwo.style.display = "none";
     });
 };
 
@@ -126,7 +120,6 @@ modal.addEventListener("click", function(event) {
 });
 
 	
-
 //Fonction qui genere la galerie pour la modale
 
 function generateProjectModal(works) {
@@ -161,8 +154,6 @@ function generateProjectModal(works) {
             
             
             
-            
-
             sectionGallery.appendChild(worksElement);
             worksElement.appendChild(imageElement);
             worksElement.appendChild(titleElement);
@@ -218,29 +209,22 @@ for(let i = 0; i < figures.length; i++){
     });
 };
 
-
-
-
-
-
-
-
 //Pour passer de la première à la seconde page de modal et vice-versa (toujours en commencant par la première)
 
 const toggleModal = document.querySelectorAll(".toggleModalButton");
-const modalItself = document.querySelector(".modalItself");
-const modalOtherSelf = document.querySelector(".modalOtherSelf");
-modalItself.style.display = "flex";
+const modalPageOne = document.querySelector(".modalPageOne");
+const modalPageTwo = document.querySelector(".modalPageTwo");
+modalPageOne.style.display = "flex";
 
 for(let i = 0; i < toggleModal.length; i++){
     toggleModal[i].addEventListener("click", function() {
         
-        if (modalItself.style.display === "flex") {
-            modalItself.style.display = "none";
-            modalOtherSelf.style.display = "flex";
+        if (modalPageOne.style.display === "flex") {
+            modalPageOne.style.display = "none";
+            modalPageTwo.style.display = "flex";
         } else {
-            modalItself.style.display = "flex";
-            modalOtherSelf.style.display = "none";
+            modalPageOne.style.display = "flex";
+            modalPageTwo.style.display = "none";
         };
     });
 };
@@ -281,7 +265,6 @@ function homeMadeMax(works) {
 }*/
 
 
-
 const inputImageUrl = document.querySelector("#imageUrl");
 inputImageUrl.style.opacity = 0;
 
@@ -310,8 +293,7 @@ imageUrl.addEventListener("change", function() {
 });
 
 
-
-//Le bouton submit rajoute les infos
+//Le bouton submit pour rajouter les travaux
 
 submitWork.addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -357,11 +339,7 @@ function loginTogglin() {
     const authenticationToggle = sessionStorage.getItem("authenticationToggle");
     const loginToggle = document.querySelector("#loginLogout");
     if (authenticationToggle === "true" ) {
-
         loginToggle.innerText = "logout";
-        
-
-
     } else {
         loginToggle.innerText = "login";
     };
@@ -388,7 +366,6 @@ async function rmWork(id) {
         const responseWorks = await fetch('http://localhost:5678/api/works');
         const works = await responseWorks.json();
 
-
         const responseCategories = await fetch("http://localhost:5678/api/categories");
         const categories = await responseCategories.json();
 
@@ -412,9 +389,9 @@ for (let i = 0; i < binIcon.length; i++){
     });
 };
 
-//Le bouton supprimer la galerie retire tous les travaux d'un coup (sécurité)
+//Le bouton supprimer la galerie retire tous les travaux d'un coup (sécurité ???)
 
-const rmAll = document.querySelector(".devoid");
+const rmAll = document.querySelector(".massDeletion");
 
 rmAll.addEventListener("click", function() {
     for (let i = 0; i < works.length; i++){
