@@ -7,8 +7,7 @@ const works = await responseWorks.json();
 const responseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await responseCategories.json();
 
-console.log(works);
-console.log(categories);
+
 
 
 
@@ -184,8 +183,7 @@ function editToggle() {
         
 };
 
-console.log(sessionStorage);
-console.log(sessionStorage.getItem('authenticationToggle'));
+
 
 editToggle();
 
@@ -325,6 +323,7 @@ submitWork.addEventListener("submit", async function(event) {
         const newWorks = works.push(await addWorks.json());
         generateProject(newWorks);
         generateProjectModal(newWorks);
+
     } else {
         return alert("Erreur lors de l'ajout de projet, tous les champs sont nécessaires");
     };
@@ -418,4 +417,5 @@ const logout = document.querySelector("#loginLogout")
 
 logout.addEventListener("click", function() {
     sessionStorage.setItem("authenticationToggle", "false");
+    sessionStorage.clear();
 });
